@@ -42,7 +42,7 @@ app.get("/url/emotion", (req, res) => {
     };
     nlu.analyze(analyzeParams)
         .then(analysisResults => {
-            return res.json(analysisResults.result.keywords[0].emotion);
+            return res.send(Object.entries(analysisResults.result.keywords[0].emotion));
         })
         .catch(err => {
             console.log('Error U/E:', err);
@@ -67,7 +67,7 @@ app.get("/url/sentiment", (req, res) => {
     };
     nlu.analyze(analyzeParams)
         .then(analysisResults => {
-            return res.json(analysisResults.result.keywords[0].sentiment);
+            return res.send(analysisResults.result.keywords[0].sentiment.label);
         })
         .catch(err => {
             console.log('Error U/S:', err);
@@ -91,7 +91,7 @@ app.get("/text/emotion", (req, res) => {
     };
     nlu.analyze(analyzeParams)
         .then(analysisResults => {
-            return res.json(analysisResults.result.keywords[0].emotion);
+            return res.send(Object.entries(analysisResults.result.keywords[0].emotion));
         })
         .catch(err => {
             console.log('Error T/E:', err);
@@ -115,7 +115,7 @@ app.get("/text/sentiment", (req, res) => {
     };
     nlu.analyze(analyzeParams)
         .then(analysisResults => {
-            return res.json(analysisResults.result.keywords[0].sentiment);
+            return res.send(analysisResults.result.keywords[0].sentiment.label);
         })
         .catch(err => {
             console.log('Error T/S:', err);
