@@ -3,6 +3,27 @@ const app = new express();
 
 app.use(express.static('client'))
 
+
+
+const dotnenv=require('dotenv');
+dotnenv.config();
+
+function getNLUInstance() {
+    let api_key = process.env.API_KEY;
+    let api_url = process.env.API_URL;
+
+    const NaturalLanguageUnderstandingV1 = require('ibm-watson/natural-language-understading/v1');
+    const { IamAtuhenticator } = require('ibm-watson/auth');
+
+    const naturalLanguageUnserstanding = new NaturalLanguageUnderstandingV1({
+        version: '2020-08-01',
+        authenticator: new IamAtuhenticator({ apikey: api_key}),
+        serviceUrl: api_url
+    });
+    return naturalLanguageUnserstanding;
+}
+
+
 const cors_app = require('cors');
 app.use(cors_app());
 
